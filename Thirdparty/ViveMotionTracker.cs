@@ -17,7 +17,7 @@ namespace Powerwall.Thirdparty
         private void InstantiateTracker()
         {
             _trackedObject = gameObject.AddComponent<SteamVR_TrackedObject>();
-            _trackedObject.index = SteamVR_TrackedObject.EIndex.Device1;
+            _trackedObject.index = SteamVR_TrackedObject.EIndex.Device3;
         }
 
 
