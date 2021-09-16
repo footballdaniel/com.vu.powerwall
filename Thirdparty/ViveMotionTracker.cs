@@ -6,24 +6,18 @@ namespace Powerwall.Thirdparty
     [Serializable]
     public class ViveMotionTracker : MotionTracker
     {
-        [SerializeField] private SteamVR_TrackedObject _trackedObject;
-        [SerializeField] private GameObject _viveTrackedObject;
+        [SerializeField] SteamVR_TrackedObject _trackedObject;
+        [SerializeField] GameObject _viveTrackedObject;
+        [SerializeField] SteamVR_TrackedObject.EIndex _device = SteamVR_TrackedObject.EIndex.Device1;
+        
+        void Awake() => InstantiateTracker();
 
-        private void Awake()
-        {
-            InstantiateTracker();
-        }
-
-        private void InstantiateTracker()
+        void InstantiateTracker()
         {
             _trackedObject = gameObject.AddComponent<SteamVR_TrackedObject>();
-            _trackedObject.index = SteamVR_TrackedObject.EIndex.Device3;
+            _trackedObject.index = _device;
         }
 
-
-        public override Vector3 GetPosition()
-        {
-            return _viveTrackedObject.transform.position;
-        }
+        public override Vector3 GetPosition() =>  _viveTrackedObject.transform.position;
     }
 }
