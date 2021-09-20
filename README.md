@@ -1,1 +1,24 @@
-# com.vroom.powerwall
+# Powerwall Unity
+
+## Abstract
+The aim is to create a perspective projection on a Powerwall. Hardware is a ViveTracker and a Projector.
+The ViveTracker position is provided by SteamVR. Unity can access the position either through SteamVR-Plugin (Asset store) or in the future with the OpenXR package.
+Currently the OpenXR does only support controllers (left and right hand) but not the ViveTracker
+
+## Requirements
+- SteamVR installed as app (tested with 1.20)
+- [SteamVR-Plugin](https://assetstore.unity.com/packages/tools/integration/steamvr-plugin-32647)
+
+## Documentation
+### Tracking object
+- New Unity project
+- Install SteamVR Plugin asset
+- Create a `Steam VR_Tracked_Object` and add it as a component to the scene
+    - Switch the `Index` field to match the index of the tracker (usually somewhere between 2 and 3)
+
+### Tracking without HMD
+- Go to `<YOURSTEAMDIRECTORY>\Steam\steamapps\common\SteamVR\drivers\null\resources\settings\default.vrsettings`
+    - Change `enabled` to `true`
+- Go to `<YOURSTEAMDIRECTORY>\Steam\steamapps\common\SteamVR\resources\settings\default.vrsettings`
+    - Change `requireHMD` to `false`
+    - Change `forcedDriver` to `null`
