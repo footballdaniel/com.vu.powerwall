@@ -26,7 +26,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8560577731032093030}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: -1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -45,10 +45,9 @@ Camera:
   m_ClearFlags: 1
   m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
   m_projectionMatrixMode: 0
-  m_GateFitMode: 2
-  m_FOVAxisMode: 0
   m_SensorSize: {x: 36, y: 24}
   m_LensShift: {x: 0, y: 0}
+  m_GateFitMode: 2
   m_FocalLength: 50
   m_NormalizedViewPortRect:
     serializedVersion: 2
@@ -58,7 +57,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 58.517845
+  field of view: 81.645584
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -153,7 +152,6 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -165,7 +163,6 @@ MeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -188,7 +185,7 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 4
+  serializedVersion: 3
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
@@ -202,6 +199,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8560577731591883106}
   - component: {fileID: 8560577731591883109}
+  - component: {fileID: 4837106989455084635}
   m_Layer: 0
   m_Name: ViveTracker
   m_TagString: Untagged
@@ -237,6 +235,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   index: 3
   origin: {fileID: 0}
+--- !u!114 &4837106989455084635
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8560577731591883107}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9390a5ab238d474883731f758db70bfd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _device: 1
 --- !u!1 &8560577731719413186
 GameObject:
   m_ObjectHideFlags: 0
@@ -263,7 +274,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8560577731719413186}
-  m_LocalRotation: {x: -0, y: -0.0010844981, z: -0, w: -0.9999994}
+  m_LocalRotation: {x: -0, y: 0.0010844981, z: -0, w: 0.9999994}
   m_LocalPosition: {x: -0.02169, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -282,10 +293,9 @@ Camera:
   m_ClearFlags: 1
   m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
   m_projectionMatrixMode: 0
-  m_GateFitMode: 2
-  m_FOVAxisMode: 0
   m_SensorSize: {x: 36, y: 24}
   m_LensShift: {x: 0, y: 0}
+  m_GateFitMode: 2
   m_FocalLength: 50
   m_NormalizedViewPortRect:
     serializedVersion: 2
@@ -295,7 +305,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 58.536266
+  field of view: 81.67129
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -344,7 +354,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8560577732031297484}
-  - component: {fileID: 8560577732031297487}
+  - component: {fileID: 7042347348887904401}
   m_Layer: 0
   m_Name: 3DCamera
   m_TagString: Untagged
@@ -368,7 +378,7 @@ Transform:
   m_Father: {fileID: 8560577732318790478}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8560577732031297487
+--- !u!114 &7042347348887904401
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -377,10 +387,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 8560577732031297485}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6653073677ea06e4fafeb7dbad9233e3, type: 3}
+  m_Script: {fileID: 11500000, guid: 6049c12282c424e4f87d9d5cfa1f2e32, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _isActive3D: 0
   _cameraLeft: {fileID: 8560577731032093048}
   _cameraRight: {fileID: 8560577731719413190}
 --- !u!1 &8560577732318790479
@@ -429,6 +438,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91dde365087f72f448acdf2bf5d0071f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _motionTracker: {fileID: 0}
-  _camera: {fileID: 0}
+  _motionTracker: {fileID: 4837106989455084635}
+  cameraController: {fileID: 7042347348887904401}
   _calibrationKey: 99
+  Active3D: 0

@@ -7,7 +7,7 @@ Currently the OpenXR does only support controllers (left and right hand) but not
 
 ## Requirements
 - SteamVR installed as app (tested with 1.20)
-- [SteamVR-Plugin](https://assetstore.unity.com/packages/tools/integration/steamvr-plugin-32647)
+- Download [SteamVR-Plugin](https://assetstore.unity.com/packages/tools/integration/steamvr-plugin-32647) and place it in the `Plugin` folder of the package
 
 ## Documentation
 ### Tracking object

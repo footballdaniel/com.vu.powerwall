@@ -1,10 +1,11 @@
-﻿using UnityEngine;
+﻿using Powerwall.Thirdparty;
+using UnityEngine;
 
 namespace Powerwall.Runtime
 {
     public class PowerwallController : MonoBehaviour
     {
-        [SerializeField] MotionTracker _motionTracker;
+        [SerializeField] ViveMotionTracker _motionTracker;
         [SerializeField] StereoCameraController cameraController;
         [SerializeField] KeyCode _calibrationKey = KeyCode.C;
         [SerializeField] bool Active3D;
