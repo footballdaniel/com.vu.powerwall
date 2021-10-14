@@ -1,5 +1,12 @@
 {
     "name": "com.vroom.powerwall",
     "version": "0.0.1",
-    "displayName": "VROOM Powerwall"
+    "displayName": "VROOM Powerwall",
+    "samples": [
+        {
+            "displayName": "Powerwall",
+            "description": "Basic Powerwall setup with HTC Vive Tracker",
+            "path": "Samples~/Powerwall"
+        }
+    ]
 }

@@ -2,14 +2,15 @@
 using UnityEngine;
 using Valve.VR;
 
-namespace Powerwall.Thirdparty
+namespace VROOM.Scripts
 {
     [Serializable]
     public class ViveMotionTracker : MonoBehaviour 
     {
         [SerializeField] SteamVR_TrackedObject.EIndex _device = SteamVR_TrackedObject.EIndex.Device1;
-        SteamVR_TrackedObject _trackedObject;
 
+        public Vector3 GetPosition() =>  _trackedObject.transform.position;
+        
         void Awake() => InstantiateTracker();
 
         void InstantiateTracker()
@@ -17,7 +18,7 @@ namespace Powerwall.Thirdparty
             _trackedObject = gameObject.AddComponent<SteamVR_TrackedObject>();
             _trackedObject.index = _device;
         }
-
-        public Vector3 GetPosition() =>  _trackedObject.transform.position;
+        
+        SteamVR_TrackedObject _trackedObject;
     }
 }

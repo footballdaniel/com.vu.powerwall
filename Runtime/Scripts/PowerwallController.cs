@@ -1,29 +1,37 @@
-﻿using Powerwall.Thirdparty;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace Powerwall.Runtime
+namespace VROOM.Scripts
 {
     public class PowerwallController : MonoBehaviour
     {
+        [SerializeField] bool _active3D;
+        [SerializeField] GameObject _projectionPlane;
         [SerializeField] ViveMotionTracker _motionTracker;
-        [SerializeField] StereoCameraController cameraController;
-        [SerializeField] KeyCode _calibrationKey = KeyCode.C;
-        [SerializeField] bool Active3D;
+        [SerializeField] StereoCameraController _cameraController;
 
+        /// <summary>
+        /// Place the motion tracker at the origin of the space and call the method to calibrate
+        /// </summary>
+        public void CalibrateOrigin() => _calibrationOffset = _motionTracker.GetPosition();
+        
         void Update()
         {
             TrackCameraPosition();
 
-            if (Input.GetKeyDown(_calibrationKey))
-            {
-                if (Active3D)
-                    cameraController.Activate3D();
-                    
-                _calibrationOffset = _motionTracker.GetPosition();
-            }
+            if (_active3D)
+                _cameraController.Activate3D();
         }
 
-        void TrackCameraPosition() => cameraController.transform.position = _motionTracker.GetPosition() - _calibrationOffset;
+        void OnDrawGizmos()
+        {
+            Gizmos.DrawWireMesh(
+                _projectionPlane.GetComponent<MeshFilter>().sharedMesh,
+                _projectionPlane.transform.position,
+                _projectionPlane.transform.rotation,
+                _projectionPlane.transform.localScale);
+        }
+
+        void TrackCameraPosition() => _cameraController.transform.position = _motionTracker.GetPosition() - _calibrationOffset;
 
         Vector3 _calibrationOffset = Vector3.zero;
     }
