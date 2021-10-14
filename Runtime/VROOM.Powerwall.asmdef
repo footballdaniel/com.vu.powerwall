@@ -1,6 +1,6 @@
 {
-    "name": "Powerwall",
-    "rootNamespace": "VROOM",
+    "name": "VROOM.Powerwall",
+    "rootNamespace": "",
     "references": [
         "SteamVR"
     ],

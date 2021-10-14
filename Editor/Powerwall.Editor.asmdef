@@ -1,6 +1,6 @@
 {
     "name": "PowerwallEditor",
-    "rootNamespace": "VROOM",
+    "rootNamespace": "",
     "references": [
         "GUID:44cba267781211e48a432a2b6ab15ff2"
     ],

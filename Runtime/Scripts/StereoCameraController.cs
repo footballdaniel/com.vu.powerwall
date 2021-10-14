@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace VROOM.Scripts
+namespace Scripts
 {
     public class StereoCameraController : MonoBehaviour
     {

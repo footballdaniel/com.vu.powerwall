@@ -1,11 +1,11 @@
+using Scripts;
 using UnityEditor;
 using UnityEngine;
-using VROOM.Scripts;
 
-namespace VROOM
+namespace Editor
 {
     [CustomEditor(typeof(PowerwallController))]
-    public class CameraControllerEditor : Editor
+    public class CameraControllerEditor : UnityEditor.Editor
     {
         public override void OnInspectorGUI()
         {
