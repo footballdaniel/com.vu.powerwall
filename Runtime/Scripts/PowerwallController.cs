@@ -10,7 +10,7 @@ namespace VROOM.Scripts
         [SerializeField] StereoCameraController _cameraController;
 
         /// <summary>
-        /// Place the motion tracker at the origin of the space and call the method to calibrate
+        /// Place the motion tracker at the bottom center of the projection plane and call the method to calibrate
         /// </summary>
         public void CalibrateOrigin() => _calibrationOffset = _motionTracker.GetPosition();
         
