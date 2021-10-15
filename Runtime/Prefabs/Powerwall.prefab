@@ -58,7 +58,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 97.48002
+  field of view: 70.89619
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -68,7 +68,7 @@ Camera:
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
-  m_TargetEye: 3
+  m_TargetEye: 0
   m_HDR: 1
   m_AllowMSAA: 1
   m_AllowDynamicResolution: 0
@@ -109,7 +109,6 @@ GameObject:
   - component: {fileID: 8560577731247974805}
   - component: {fileID: 8560577731247974802}
   - component: {fileID: 8560577731247974803}
-  - component: {fileID: 8560577731247974800}
   m_Layer: 0
   m_Name: ProjectionPlane
   m_TagString: Untagged
@@ -126,7 +125,7 @@ Transform:
   m_GameObject: {fileID: 8560577731247974801}
   m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 1.3, z: 0}
-  m_LocalScale: {x: 0.45, y: 1, z: 0.26}
+  m_LocalScale: {x: 0.4, y: 1, z: 0.26}
   m_Children: []
   m_Father: {fileID: 8560577732318790478}
   m_RootOrder: 1
@@ -181,20 +180,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &8560577731247974800
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8560577731247974801}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &8560577731591883107
 GameObject:
   m_ObjectHideFlags: 0
@@ -296,7 +281,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 97.62393
+  field of view: 71.0012
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -306,7 +291,7 @@ Camera:
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
-  m_TargetEye: 3
+  m_TargetEye: 0
   m_HDR: 1
   m_AllowMSAA: 1
   m_AllowDynamicResolution: 0
