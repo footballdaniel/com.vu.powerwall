@@ -13,8 +13,6 @@ namespace Editor
             
             _controller = (PowerwallController)target;
 
-            EditorGUILayout.Space(10);
-
             EditorGUILayout.BeginHorizontal();
             EditorGUILayout.PrefixLabel(" ");
             var isButtonPressed = GUILayout.Button("Calibrate Space");
