@@ -22,4 +22,4 @@ Currently the OpenXR does only support controllers (left and right hand) but not
 - Go to `<YOURSTEAMDIRECTORY>\Steam\steamapps\common\SteamVR\resources\settings\default.vrsettings`
     - Change `requireHMD` to `false`
     - Change `forcedDriver` to `null`
-    - 	"activateMultipleDrivers^: true,
+    - Add and change `activateMultipleDrivers` to `true`,
