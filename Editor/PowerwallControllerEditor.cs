@@ -1,17 +1,18 @@
-using Scripts;
 using UnityEditor;
 using UnityEngine;
 
 namespace Editor
 {
-    [CustomEditor(typeof(PowerwallController))]
+    [CustomEditor(typeof(Powerwall))]
     public class CameraControllerEditor : UnityEditor.Editor
     {
         public override void OnInspectorGUI()
         {
             DrawDefaultInspector();
             
-            _controller = (PowerwallController)target;
+            _controller = (Powerwall)target;
+
+            EditorGUILayout.Space(10);
 
             EditorGUILayout.BeginHorizontal();
             EditorGUILayout.PrefixLabel(" ");
@@ -22,6 +23,6 @@ namespace Editor
                 _controller.CalibrateOrigin();
         }
 
-        PowerwallController _controller;
+        Powerwall _controller;
     }
 }

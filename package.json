@@ -1,7 +1,7 @@
 {
-    "name": "com.vroom.powerwall",
+    "name": "com.vu.powerwall",
     "version": "0.0.1",
-    "displayName": "VROOM Powerwall",
+    "displayName": "VU Powerwall",
     "samples": [
         {
             "displayName": "Powerwall",

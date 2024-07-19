@@ -1,9 +1,9 @@
 {
     "name": "PowerwallEditor",
+    "rootNamespace": "",
     "references": [
-        "VROOM.Powerwall"
+        "GUID:44cba267781211e48a432a2b6ab15ff2"
     ],
-    "optionalUnityReferences": [],
     "includePlatforms": [
         "Editor"
     ],
@@ -12,5 +12,7 @@
     "overrideReferences": false,
     "precompiledReferences": [],
     "autoReferenced": true,
-    "defineConstraints": []
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
 }

@@ -1,165 +1,143 @@
 ﻿using UnityEngine;
 
-namespace Scripts
+[ExecuteInEditMode]
+public class ProjectionMatrix : MonoBehaviour
 {
-    [ExecuteInEditMode]
+	public GameObject projectionScreen;
+	[SerializeField] Camera _camera;
 
-    public class ProjectionMatrix : MonoBehaviour
-    {
+	void Start()
+	{
+	}
 
-        public GameObject projectionScreen;
-        public bool estimateViewFrustum = true;
 
-        private Camera cameraComponent;
+	void LateUpdate()
+	{
+		if (!projectionScreen || !_camera)
+			return;
 
-        void LateUpdate()
-        {
-            cameraComponent = GetComponent<Camera>();
-            if (null != projectionScreen && null != cameraComponent)
-            {
-                Vector3 pa = projectionScreen.transform.TransformPoint(new Vector3(-5.0f, 0.0f, -5.0f));
-                // lower left corner in world coordinates
-                Vector3 pb = projectionScreen.transform.TransformPoint(new Vector3(5.0f, 0.0f, -5.0f));
-                // lower right corner
-                Vector3 pc = projectionScreen.transform.TransformPoint(new Vector3(-5.0f, 0.0f, 5.0f));
-                // upper left corner
-                Vector3 pe = transform.position;
-                // eye position
-                float n = cameraComponent.nearClipPlane;
-                // distance of near clipping plane
-                float f = cameraComponent.farClipPlane;
-                // distance of far clipping plane
+		// Reset the projection and world to camera matrices
+		_camera.ResetProjectionMatrix();
+		_camera.ResetWorldToCameraMatrix();
 
-                Vector3 va; // from pe to pa
-                Vector3 vb; // from pe to pb
-                Vector3 vc; // from pe to pc
-                Vector3 vr; // right axis of screen
-                Vector3 vu; // up axis of screen
-                Vector3 vn; // normal vector of screen
 
-                float l; // distance to left screen edge
-                float r; // distance to right screen edge
-                float b; // distance to bottom screen edge
-                float t; // distance to top screen edge
-                float d; // distance from eye to screen 
+		var pa = projectionScreen.transform.TransformPoint(new Vector3(-5.0f, 0.0f, -5.0f));
+		// lower left corner in world coordinates
+		var pb = projectionScreen.transform.TransformPoint(new Vector3(5.0f, 0.0f, -5.0f));
+		// lower right corner
+		var pc = projectionScreen.transform.TransformPoint(new Vector3(-5.0f, 0.0f, 5.0f));
+		// upper left corner
+		var pe = transform.position;
+		// eye position
+		var n = _camera.nearClipPlane;
+		// distance of near clipping plane
+		var f = _camera.farClipPlane;
+		// distance of far clipping plane
 
-                vr = pb - pa;
-                vu = pc - pa;
-                vr.Normalize();
-                vu.Normalize();
-                vn = -Vector3.Cross(vr, vu);
-                // we need the minus sign because Unity 
-                // uses a left-handed coordinate system
-                vn.Normalize();
+		Vector3 va; // from pe to pa
+		Vector3 vb; // from pe to pb
+		Vector3 vc; // from pe to pc
+		Vector3 vr; // right axis of screen
+		Vector3 vu; // up axis of screen
+		Vector3 vn; // normal vector of screen
 
-                va = pa - pe;
-                vb = pb - pe;
-                vc = pc - pe;
+		float l; // distance to left screen edge
+		float r; // distance to right screen edge
+		float b; // distance to bottom screen edge
+		float t; // distance to top screen edge
+		float d; // distance from eye to screen 
 
-                d = -Vector3.Dot(va, vn);
-                l = Vector3.Dot(vr, va) * n / d;
-                r = Vector3.Dot(vr, vb) * n / d;
-                b = Vector3.Dot(vu, va) * n / d;
-                t = Vector3.Dot(vu, vc) * n / d;
+		vr = pb - pa;
+		vu = pc - pa;
+		vr.Normalize();
+		vu.Normalize();
+		vn = -Vector3.Cross(vr, vu);
+		// we need the minus sign because Unity 
+		// uses a left-handed coordinate system
+		vn.Normalize();
 
-                Matrix4x4 p = new Matrix4x4(); // projection matrix 
-                p[0, 0] = 2.0f * n / (r - l);
-                p[0, 1] = 0.0f;
-                p[0, 2] = (r + l) / (r - l);
-                p[0, 3] = 0.0f;
+		va = pa - pe;
+		vb = pb - pe;
+		vc = pc - pe;
 
-                p[1, 0] = 0.0f;
-                p[1, 1] = 2.0f * n / (t - b);
-                p[1, 2] = (t + b) / (t - b);
-                p[1, 3] = 0.0f;
+		d = -Vector3.Dot(va, vn);
+		l = Vector3.Dot(vr, va) * n / d;
+		r = Vector3.Dot(vr, vb) * n / d;
+		b = Vector3.Dot(vu, va) * n / d;
+		t = Vector3.Dot(vu, vc) * n / d;
 
-                p[2, 0] = 0.0f;
-                p[2, 1] = 0.0f;
-                p[2, 2] = (f + n) / (n - f);
-                p[2, 3] = 2.0f * f * n / (n - f);
+		// projection matrix
+		var p = new Matrix4x4
+		{
+			[0, 0] = 2.0f * n / (r - l),
+			[0, 1] = 0.0f,
+			[0, 2] = (r + l) / (r - l),
+			[0, 3] = 0.0f,
+			[1, 0] = 0.0f,
+			[1, 1] = 2.0f * n / (t - b),
+			[1, 2] = (t + b) / (t - b),
+			[1, 3] = 0.0f,
+			[2, 0] = 0.0f,
+			[2, 1] = 0.0f,
+			[2, 2] = (f + n) / (n - f),
+			[2, 3] = 2.0f * f * n / (n - f),
+			[3, 0] = 0.0f,
+			[3, 1] = 0.0f,
+			[3, 2] = -1.0f,
+			[3, 3] = 0.0f
+		};
 
-                p[3, 0] = 0.0f;
-                p[3, 1] = 0.0f;
-                p[3, 2] = -1.0f;
-                p[3, 3] = 0.0f;
+		// rotation matrix
+		var rm = new Matrix4x4
+		{
+			[0, 0] = vr.x,
+			[0, 1] = vr.y,
+			[0, 2] = vr.z,
+			[0, 3] = 0.0f,
+			[1, 0] = vu.x,
+			[1, 1] = vu.y,
+			[1, 2] = vu.z,
+			[1, 3] = 0.0f,
+			[2, 0] = vn.x,
+			[2, 1] = vn.y,
+			[2, 2] = vn.z,
+			[2, 3] = 0.0f,
+			[3, 0] = 0.0f,
+			[3, 1] = 0.0f,
+			[3, 2] = 0.0f,
+			[3, 3] = 1.0f
+		};
 
-                Matrix4x4 rm = new Matrix4x4(); // rotation matrix;
-                rm[0, 0] = vr.x;
-                rm[0, 1] = vr.y;
-                rm[0, 2] = vr.z;
-                rm[0, 3] = 0.0f;
+		// translation matrix;
+		var tm = new Matrix4x4
+		{
+			[0, 0] = 1.0f,
+			[0, 1] = 0.0f,
+			[0, 2] = 0.0f,
+			[0, 3] = -pe.x,
+			[1, 0] = 0.0f,
+			[1, 1] = 1.0f,
+			[1, 2] = 0.0f,
+			[1, 3] = -pe.y,
+			[2, 0] = 0.0f,
+			[2, 1] = 0.0f,
+			[2, 2] = 1.0f,
+			[2, 3] = -pe.z,
+			[3, 0] = 0.0f,
+			[3, 1] = 0.0f,
+			[3, 2] = 0.0f,
+			[3, 3] = 1.0f
+		};
 
-                rm[1, 0] = vu.x;
-                rm[1, 1] = vu.y;
-                rm[1, 2] = vu.z;
-                rm[1, 3] = 0.0f;
 
-                rm[2, 0] = vn.x;
-                rm[2, 1] = vn.y;
-                rm[2, 2] = vn.z;
-                rm[2, 3] = 0.0f;
+		// Check if the projection matrix contains valid values
+		for (var i = 0; i < 4; i++)
+		for (var j = 0; j < 4; j++)
+			if (float.IsNaN(p[i, j]) || float.IsInfinity(p[i, j]))
+				return;
 
-                rm[3, 0] = 0.0f;
-                rm[3, 1] = 0.0f;
-                rm[3, 2] = 0.0f;
-                rm[3, 3] = 1.0f;
-
-                Matrix4x4 tm = new Matrix4x4(); // translation matrix;
-                tm[0, 0] = 1.0f;
-                tm[0, 1] = 0.0f;
-                tm[0, 2] = 0.0f;
-                tm[0, 3] = -pe.x;
-
-                tm[1, 0] = 0.0f;
-                tm[1, 1] = 1.0f;
-                tm[1, 2] = 0.0f;
-                tm[1, 3] = -pe.y;
-
-                tm[2, 0] = 0.0f;
-                tm[2, 1] = 0.0f;
-                tm[2, 2] = 1.0f;
-                tm[2, 3] = -pe.z;
-
-                tm[3, 0] = 0.0f;
-                tm[3, 1] = 0.0f;
-                tm[3, 2] = 0.0f;
-                tm[3, 3] = 1.0f;
-
-                // set matrices
-                cameraComponent.projectionMatrix = p;
-                cameraComponent.worldToCameraMatrix = rm * tm;
-                // The original paper puts everything into the projection 
-                // matrix (i.e. sets it to p * rm * tm and the other 
-                // matrix to the identity), but this doesn't appear to 
-                // work with Unity's shadow maps.
-
-                if (estimateViewFrustum)
-                {
-                    // rotate camera to screen for culling to work
-                    Quaternion q = new Quaternion();
-                    q.SetLookRotation((0.5f * (pb + pc) - pe), vu);
-                    // look at center of screen
-                    cameraComponent.transform.rotation = q;
-
-                    // set fieldOfView to a conservative estimate 
-                    // to make frustum tall enough
-                    if (cameraComponent.aspect >= 1.0)
-                    {
-                        cameraComponent.fieldOfView = Mathf.Rad2Deg *
-                                                      Mathf.Atan(((pb - pa).magnitude + (pc - pa).magnitude)
-                                                                 / va.magnitude);
-                    }
-                    else
-                    {
-                        // take the camera aspect into account to 
-                        // make the frustum wide enough 
-                        cameraComponent.fieldOfView =
-                            Mathf.Rad2Deg / cameraComponent.aspect *
-                            Mathf.Atan(((pb - pa).magnitude + (pc - pa).magnitude)
-                                       / va.magnitude);
-                    }
-                }
-            }
-        }
-    }
+		// Set the projection matrix and world to camera matrix
+		_camera.projectionMatrix = p;
+		_camera.worldToCameraMatrix = rm * tm;
+	}
 }
