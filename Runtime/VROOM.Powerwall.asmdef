@@ -2,7 +2,9 @@
     "name": "VROOM.Powerwall",
     "rootNamespace": "",
     "references": [
-        "SteamVR"
+        "SteamVR",
+        "Unity.XR.OpenXR",
+        "Unity.InputSystem"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
