@@ -1,7 +1,7 @@
-# Powerwall Unity
+# Powerwall Unity package
 
 ## Abstract
-The aim is to create a perspective projection on a Powerwall. Hardware is a ViveTracker and a Projector.
+Small unity package with the aim to create a perspective projection on a Powerwall. Hardware is a ViveTracker and a Projector.
 The ViveTracker position is provided by SteamVR. Unity can access the position either through SteamVR-Plugin (Asset store) or in the future with the OpenXR package.
 Currently the OpenXR does only support controllers (left and right hand) but not the ViveTracker
 
