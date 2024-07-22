@@ -6,22 +6,24 @@ public class PowerWall : MonoBehaviour
         
     [Header("Dependencies")]
     [SerializeField] GameObject _projectionPlane;
-    [SerializeField] ViveMotionTracker _motionTracker;
+    [SerializeField] XRTracker _motionTracker;
     [SerializeField] StereoCameraController _cameraController;
-    [SerializeField] Persistence _persistence;
-        
-    /// <summary>
-    /// Place the motion tracker at the bottom center of the projection plane and call the method to calibrate
-    /// </summary>
+    [SerializeField] private Persistence _persistence;
+    
     public void CalibrateOrigin()
     {
         _calibrationData = new CalibrationData(_motionTracker.Position, _motionTracker.Rotation);
         _persistence.Save(_calibrationData);
+        
+        Debug.Log(_calibrationData.Rotation.eulerAngles.y);
     }
 
     void Start()
     {
+        _persistence = new Persistence();
         _calibrationData = _persistence.TryLoadCalibration();
+        
+
         
         if (_activateStereoRendering)
             _cameraController.Activate3D();
@@ -30,6 +32,8 @@ public class PowerWall : MonoBehaviour
     void Update()
     {
         AddOffsetToCamera();
+        
+
     }
 
     void AddOffsetToCamera()
