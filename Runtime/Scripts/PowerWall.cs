@@ -2,42 +2,43 @@
 
 public class PowerWall : MonoBehaviour
 {
-    public GameObject ProjectionPlane => _projectionPlane;
-    
-    
-    [SerializeField] bool _active3D;
+    [SerializeField] bool _activateStereoRendering;
         
     [Header("Dependencies")]
     [SerializeField] GameObject _projectionPlane;
     [SerializeField] ViveMotionTracker _motionTracker;
     [SerializeField] StereoCameraController _cameraController;
+    [SerializeField] Persistence _persistence;
         
-    [Header("Persistent")]
-    [SerializeField] SaveFile _saveFile;
-        
-
     /// <summary>
     /// Place the motion tracker at the bottom center of the projection plane and call the method to calibrate
     /// </summary>
     public void CalibrateOrigin()
     {
-        _calibrationOffset = _motionTracker.GetPosition();
-        _saveFile.Save(new CalibrationSaveData(_calibrationOffset));
+        _calibrationData = new CalibrationData(_motionTracker.Position, _motionTracker.Rotation);
+        _persistence.Save(_calibrationData);
     }
 
-    void Start() => _calibrationOffset = _saveFile.TryLoadCalibration();
+    void Start()
+    {
+        _calibrationData = _persistence.TryLoadCalibration();
+        
+        if (_activateStereoRendering)
+            _cameraController.Activate3D();
+    }
 
     void Update()
     {
         AddOffsetToCamera();
-
-        if (_active3D)
-            _cameraController.Activate3D();
     }
 
-    void AddOffsetToCamera() =>
-        _cameraController.transform.position = _motionTracker.GetPosition() - _calibrationOffset;
-    
+    void AddOffsetToCamera()
+    {
+        _cameraController.transform.position = _motionTracker.Position - _calibrationData.Offset;
+        _cameraController.transform.rotation = _motionTracker.Rotation * _calibrationData.Rotation;
+    }
+
+
     #region Gizmos
     void OnDrawGizmos()
     {
@@ -48,6 +49,6 @@ public class PowerWall : MonoBehaviour
             _projectionPlane.transform.localScale);
     }
     #endregion
-
-    Vector3 _calibrationOffset = Vector3.zero;
+    
+    private CalibrationData _calibrationData;
 }

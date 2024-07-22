@@ -5,8 +5,9 @@ using UnityEngine;
 [Serializable]
 public class ViveMotionTracker : MonoBehaviour 
 {
-    public Vector3 GetPosition() => transform.position;
-    
+    public Vector3 Position => transform.position;
+    public Quaternion Rotation => transform.rotation;
+
     // // [SerializeField] SteamVR_TrackedObject.EIndex _device = SteamVR_TrackedObject.EIndex.Device1;
     //
     // public Vector3 GetPosition() =>  _trackedObject.transform.position;
