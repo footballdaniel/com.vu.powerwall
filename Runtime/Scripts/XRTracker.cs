@@ -8,14 +8,37 @@ using UnityEngine.InputSystem;
 public class XRTracker : MonoBehaviour 
 {
     public Vector3 Position => transform.position;
-    public Quaternion Rotation => transform.rotation;
+    public Quaternion Rotation => _rotationAction.action.ReadValue<Quaternion>();
 
-    public InputActionAsset InputActions;
+    
+    [SerializeField] InputActionReference _positionAction;
+    [SerializeField] InputActionReference _rotationAction;
+    
 
     private void OnEnable()
     {
-        InputActions.Enable();
+        _positionAction.action.Enable();
+        _rotationAction.action.Enable();
     }
+
+    private void Update()
+    {
+        transform.position = _positionAction.action.ReadValue<Vector3>();
+        // transform.rotation = _rotationAction.action.ReadValue<Quaternion>();
+    }
+    
+    void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawRay(transform.position, transform.forward);
+        
+        // gizmo in z direction
+        Gizmos.color = Color.blue;
+        Gizmos.DrawRay(transform.position, transform.up);
+    }
+    
+    
+
 
     // // [SerializeField] SteamVR_TrackedObject.EIndex _device = SteamVR_TrackedObject.EIndex.Device1;
     //

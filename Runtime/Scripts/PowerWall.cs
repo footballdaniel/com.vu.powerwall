@@ -3,8 +3,8 @@
 public class PowerWall : MonoBehaviour
 {
     [SerializeField] bool _activateStereoRendering;
-        
-    [Header("Dependencies")]
+
+    [Header("Dependencies")] [SerializeField] private GameObject _offset;
     [SerializeField] GameObject _projectionPlane;
     [SerializeField] XRTracker _motionTracker;
     [SerializeField] StereoCameraController _cameraController;
@@ -12,18 +12,27 @@ public class PowerWall : MonoBehaviour
     
     public void CalibrateOrigin()
     {
-        _calibrationData = new CalibrationData(_motionTracker.Position, _motionTracker.Rotation);
-        _persistence.Save(_calibrationData);
+        // _calibrationData = new CalibrationData(_motionTracker.Position - transform.position, _motionTracker.Rotation);
+        // _persistence.Save(_calibrationData);
         
-        Debug.Log(_calibrationData.Rotation.eulerAngles.y);
+        // subtract offset from camera position
+        _offset.transform.localPosition = -_motionTracker.Position - transform.position;
+        _offset.transform.localRotation = Quaternion.Inverse(_motionTracker.Rotation);
+        _cameraController.transform.SetParent(_offset.transform);
+        _cameraController.transform.localRotation = Quaternion.identity;
+        _cameraController.transform.localPosition = Vector3.zero;
+        // subtract rotation from offset rotation
+        // _offset.transform.localRotation = Quaternion.Inverse(_calibrationData.Rotation);
+
+
+
+        // Debug.Log(_calibrationData.Rotation.eulerAngles.y);
     }
 
     void Start()
     {
         _persistence = new Persistence();
-        _calibrationData = _persistence.TryLoadCalibration();
-        
-
+        // _calibrationData = _persistence.TryLoadCalibration();
         
         if (_activateStereoRendering)
             _cameraController.Activate3D();
@@ -33,13 +42,12 @@ public class PowerWall : MonoBehaviour
     {
         AddOffsetToCamera();
         
-
     }
 
     void AddOffsetToCamera()
     {
-        _cameraController.transform.position = _motionTracker.Position - _calibrationData.Offset;
-        _cameraController.transform.rotation = _motionTracker.Rotation * _calibrationData.Rotation;
+        _cameraController.transform.localPosition = _motionTracker.Position;
+        //_cameraController.transform.rotation = _motionTracker.Rotation * _calibrationData.Rotation;
     }
 
 
@@ -51,6 +59,10 @@ public class PowerWall : MonoBehaviour
             _projectionPlane.transform.position,
             _projectionPlane.transform.rotation,
             _projectionPlane.transform.localScale);
+        
+        
+        Gizmos.color = Color.red;
+        Gizmos.DrawRay(transform.position, transform.forward);
     }
     #endregion
     

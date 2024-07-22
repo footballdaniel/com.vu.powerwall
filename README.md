@@ -17,9 +17,15 @@ Currently the OpenXR does only support controllers (left and right hand) but not
     - Switch the `Index` field to match the index of the tracker (usually somewhere between 2 and 3)
 
 ### Tracking without HMD
+- First, calibrate ground with headet plugged in
 - Go to `<YOURSTEAMDIRECTORY>\Steam\steamapps\common\SteamVR\drivers\null\resources\settings\default.vrsettings`
     - Change `enabled` to `true`
 - Go to `<YOURSTEAMDIRECTORY>\Steam\steamapps\common\SteamVR\resources\settings\default.vrsettings`
     - Change `requireHMD` to `false`
     - Change `forcedDriver` to `null`
     - Add and change `activateMultipleDrivers` to `true`,
+- Now, only the USB needs to be plugged in, not hdmi
+
+
+
+
