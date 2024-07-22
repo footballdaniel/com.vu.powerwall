@@ -3,14 +3,16 @@ using UnityEngine;
 
 namespace Editor
 {
-    [CustomEditor(typeof(Powerwall))]
-    public class CameraControllerEditor : UnityEditor.Editor
+    [CustomEditor(typeof(PowerWall))]
+    public class PowerWallEditor : UnityEditor.Editor
     {
+        PowerWall _controller;
+
         public override void OnInspectorGUI()
         {
             DrawDefaultInspector();
-            
-            _controller = (Powerwall)target;
+		
+            _controller = (PowerWall)target;
 
             EditorGUILayout.Space(10);
 
@@ -18,11 +20,9 @@ namespace Editor
             EditorGUILayout.PrefixLabel(" ");
             var isButtonPressed = GUILayout.Button("Calibrate Space");
             EditorGUILayout.EndHorizontal();
-            
+		
             if(isButtonPressed)
                 _controller.CalibrateOrigin();
         }
-
-        Powerwall _controller;
     }
 }

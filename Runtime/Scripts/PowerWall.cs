@@ -1,7 +1,10 @@
 ﻿using UnityEngine;
 
-public class Powerwall : MonoBehaviour
+public class PowerWall : MonoBehaviour
 {
+    public GameObject ProjectionPlane => _projectionPlane;
+    
+    
     [SerializeField] bool _active3D;
         
     [Header("Dependencies")]
@@ -34,7 +37,7 @@ public class Powerwall : MonoBehaviour
 
     void AddOffsetToCamera() =>
         _cameraController.transform.position = _motionTracker.GetPosition() - _calibrationOffset;
-
+    
     #region Gizmos
     void OnDrawGizmos()
     {
@@ -43,11 +46,7 @@ public class Powerwall : MonoBehaviour
             _projectionPlane.transform.position,
             _projectionPlane.transform.rotation,
             _projectionPlane.transform.localScale);
-        
-        Debug.LogError(" test");
     }
-    
-    
     #endregion
 
     Vector3 _calibrationOffset = Vector3.zero;
