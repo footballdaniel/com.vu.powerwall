@@ -146,11 +146,11 @@ public class ProjectionMatrix : MonoBehaviour
 		};
 
 
-		// // Check if the projection matrix contains valid values
-		// for (var i = 0; i < 4; i++)
-		// for (var j = 0; j < 4; j++)
-		// 	if (float.IsNaN(p[i, j]) || float.IsInfinity(p[i, j]))
-		// 		return;
+		// Check if the projection matrix contains valid values
+		for (var i = 0; i < 4; i++)
+		for (var j = 0; j < 4; j++)
+			if (float.IsNaN(p[i, j]) || float.IsInfinity(p[i, j]))
+				return;
 
 		// Set the projection matrix and world to camera matrix
 		_camera.projectionMatrix = p;
