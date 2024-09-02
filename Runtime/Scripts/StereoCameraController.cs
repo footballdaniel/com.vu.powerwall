@@ -2,19 +2,25 @@
 
 public class StereoCameraController : MonoBehaviour
 {
+    [SerializeField] XRTracker _motionTracker;
+    
     [SerializeField] Camera _cameraLeft;
     [SerializeField] Camera _cameraRight;
     
     void Awake() => Application.targetFrameRate = 120;
+
+    private void Start()
+    {
+        transform.SetParent(_motionTracker.transform);
+        transform.localPosition = Vector3.zero;
+    }
 
     void FixedUpdate()
     {
         if (_active3D)
             SwitchBetweenCameras();
     }
-
-    public void Activate3D() => _active3D = true;
-
+    
     void SwitchBetweenCameras()
     {
         if (_displayLeftEyeImage)

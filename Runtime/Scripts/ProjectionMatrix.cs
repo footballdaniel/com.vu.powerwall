@@ -1,19 +1,33 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
+using UnityEngine.Serialization;
 
 [ExecuteInEditMode]
 public class ProjectionMatrix : MonoBehaviour
 {
-	public GameObject projectionScreen;
+	[SerializeField] GameObject _projectionScreen;
 	[SerializeField] Camera _camera;
+	private Vector3 _pc;
+	private Vector3 _pa;
+	private Vector3 _pb;
 
-	void Start()
+	private void OnDrawGizmos()
 	{
+		// pa
+		Gizmos.color = Color.red;
+		Gizmos.DrawSphere(_pa, 0.1f);
+		// pb
+		Gizmos.color = Color.green;
+		Gizmos.DrawSphere(_pb, 0.1f);
+		// pc
+		Gizmos.color = Color.blue;
+		Gizmos.DrawSphere(_pc, 0.1f);
 	}
 
 
 	void LateUpdate()
 	{
-		if (!projectionScreen || !_camera)
+		if (!_projectionScreen || !_camera)
 			return;
 
 		// Reset the projection and world to camera matrices
@@ -21,11 +35,13 @@ public class ProjectionMatrix : MonoBehaviour
 		_camera.ResetWorldToCameraMatrix();
 
 
-		var pa = projectionScreen.transform.TransformPoint(new Vector3(-5.0f, 0.0f, -5.0f));
+		_pa = _projectionScreen.transform.TransformPoint(new Vector3(-5.0f, 0.0f, -5.0f));
 		// lower left corner in world coordinates
-		var pb = projectionScreen.transform.TransformPoint(new Vector3(5.0f, 0.0f, -5.0f));
+		_pb = _projectionScreen.transform.TransformPoint(new Vector3(5.0f, 0.0f, -5.0f));
 		// lower right corner
-		var pc = projectionScreen.transform.TransformPoint(new Vector3(-5.0f, 0.0f, 5.0f));
+		_pc = _projectionScreen.transform.TransformPoint(new Vector3(-5.0f, 0.0f, 5.0f));
+		
+		
 		// upper left corner
 		var pe = transform.position;
 		// eye position
@@ -36,7 +52,7 @@ public class ProjectionMatrix : MonoBehaviour
 
 		Vector3 va; // from pe to pa
 		Vector3 vb; // from pe to pb
-		Vector3 vc; // from pe to pc
+		Vector3 vc; // from pe to _pc
 		Vector3 vr; // right axis of screen
 		Vector3 vu; // up axis of screen
 		Vector3 vn; // normal vector of screen
@@ -47,8 +63,8 @@ public class ProjectionMatrix : MonoBehaviour
 		float t; // distance to top screen edge
 		float d; // distance from eye to screen 
 
-		vr = pb - pa;
-		vu = pc - pa;
+		vr = _pb - _pa;
+		vu = _pc - _pa;
 		vr.Normalize();
 		vu.Normalize();
 		vn = -Vector3.Cross(vr, vu);
@@ -56,9 +72,9 @@ public class ProjectionMatrix : MonoBehaviour
 		// uses a left-handed coordinate system
 		vn.Normalize();
 
-		va = pa - pe;
-		vb = pb - pe;
-		vc = pc - pe;
+		va = _pa - pe;
+		vb = _pb - pe;
+		vc = _pc - pe;
 
 		d = -Vector3.Dot(va, vn);
 		l = Vector3.Dot(vr, va) * n / d;
@@ -130,11 +146,11 @@ public class ProjectionMatrix : MonoBehaviour
 		};
 
 
-		// Check if the projection matrix contains valid values
-		for (var i = 0; i < 4; i++)
-		for (var j = 0; j < 4; j++)
-			if (float.IsNaN(p[i, j]) || float.IsInfinity(p[i, j]))
-				return;
+		// // Check if the projection matrix contains valid values
+		// for (var i = 0; i < 4; i++)
+		// for (var j = 0; j < 4; j++)
+		// 	if (float.IsNaN(p[i, j]) || float.IsInfinity(p[i, j]))
+		// 		return;
 
 		// Set the projection matrix and world to camera matrix
 		_camera.projectionMatrix = p;

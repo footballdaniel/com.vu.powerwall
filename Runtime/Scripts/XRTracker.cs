@@ -8,23 +8,23 @@ using UnityEngine.InputSystem;
 public class XRTracker : MonoBehaviour 
 {
     public Vector3 Position => transform.position;
-    public Quaternion Rotation => _rotationAction.action.ReadValue<Quaternion>();
-
     
     [SerializeField] InputActionReference _positionAction;
-    [SerializeField] InputActionReference _rotationAction;
     
 
-    private void OnEnable()
+    void OnEnable()
     {
         _positionAction.action.Enable();
-        _rotationAction.action.Enable();
+    }
+    
+    void OnDisable()
+    {
+        _positionAction.action.Disable();
     }
 
     private void Update()
     {
         transform.position = _positionAction.action.ReadValue<Vector3>();
-        // transform.rotation = _rotationAction.action.ReadValue<Quaternion>();
     }
     
     void OnDrawGizmos()
