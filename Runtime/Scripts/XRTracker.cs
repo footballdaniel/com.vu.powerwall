@@ -7,10 +7,10 @@ using UnityEngine.InputSystem;
 [Serializable]
 public class XRTracker : MonoBehaviour 
 {
-    public Vector3 Position => transform.position;
+    
     
     [SerializeField] InputActionReference _positionAction;
-    
+    [SerializeField] bool _isXForward;
 
     void OnEnable()
     {
@@ -24,7 +24,13 @@ public class XRTracker : MonoBehaviour
 
     private void Update()
     {
-        transform.position = _positionAction.action.ReadValue<Vector3>();
+        var position = _positionAction.action.ReadValue<Vector3>();
+        
+        if (_isXForward)
+            transform.localPosition = new Vector3(position.z, position.y, -position.x);
+        else
+            transform.localPosition = position;
+        
     }
     
     void OnDrawGizmos()
@@ -36,21 +42,4 @@ public class XRTracker : MonoBehaviour
         Gizmos.color = Color.blue;
         Gizmos.DrawRay(transform.position, transform.up);
     }
-    
-    
-
-
-    // // [SerializeField] SteamVR_TrackedObject.EIndex _device = SteamVR_TrackedObject.EIndex.Device1;
-    //
-    // public Vector3 GetPosition() =>  _trackedObject.transform.position;
-    //     
-    // void Awake() => InstantiateTracker();
-    //
-    // void InstantiateTracker()
-    // {
-    //     _trackedObject = gameObject.AddComponent<SteamVR_TrackedObject>();
-    //     _trackedObject.index = _device;
-    // }
-    //     
-    // SteamVR_TrackedObject _trackedObject;
 }

@@ -1,28 +1,10 @@
-﻿using System;
-using UnityEngine;
-using UnityEngine.Serialization;
+﻿using UnityEngine;
 
 [ExecuteInEditMode]
 public class ProjectionMatrix : MonoBehaviour
 {
 	[SerializeField] GameObject _projectionScreen;
 	[SerializeField] Camera _camera;
-	private Vector3 _pc;
-	private Vector3 _pa;
-	private Vector3 _pb;
-
-	private void OnDrawGizmos()
-	{
-		// pa
-		Gizmos.color = Color.red;
-		Gizmos.DrawSphere(_pa, 0.1f);
-		// pb
-		Gizmos.color = Color.green;
-		Gizmos.DrawSphere(_pb, 0.1f);
-		// pc
-		Gizmos.color = Color.blue;
-		Gizmos.DrawSphere(_pc, 0.1f);
-	}
 
 
 	void LateUpdate()
@@ -34,12 +16,11 @@ public class ProjectionMatrix : MonoBehaviour
 		_camera.ResetProjectionMatrix();
 		_camera.ResetWorldToCameraMatrix();
 
-
-		_pa = _projectionScreen.transform.TransformPoint(new Vector3(-5.0f, 0.0f, -5.0f));
+		var pa = _projectionScreen.transform.TransformPoint(new Vector3(-5.0f, 0.0f, -5.0f));
 		// lower left corner in world coordinates
-		_pb = _projectionScreen.transform.TransformPoint(new Vector3(5.0f, 0.0f, -5.0f));
+		var pb = _projectionScreen.transform.TransformPoint(new Vector3(5.0f, 0.0f, -5.0f));
 		// lower right corner
-		_pc = _projectionScreen.transform.TransformPoint(new Vector3(-5.0f, 0.0f, 5.0f));
+		var pc = _projectionScreen.transform.TransformPoint(new Vector3(-5.0f, 0.0f, 5.0f));
 		
 		
 		// upper left corner
@@ -63,8 +44,8 @@ public class ProjectionMatrix : MonoBehaviour
 		float t; // distance to top screen edge
 		float d; // distance from eye to screen 
 
-		vr = _pb - _pa;
-		vu = _pc - _pa;
+		vr = pb - pa;
+		vu = pc - pa;
 		vr.Normalize();
 		vu.Normalize();
 		vn = -Vector3.Cross(vr, vu);
@@ -72,9 +53,9 @@ public class ProjectionMatrix : MonoBehaviour
 		// uses a left-handed coordinate system
 		vn.Normalize();
 
-		va = _pa - pe;
-		vb = _pb - pe;
-		vc = _pc - pe;
+		va = pa - pe;
+		vb = pb - pe;
+		vc = pc - pe;
 
 		d = -Vector3.Dot(va, vn);
 		l = Vector3.Dot(vr, va) * n / d;
@@ -155,5 +136,10 @@ public class ProjectionMatrix : MonoBehaviour
 		// Set the projection matrix and world to camera matrix
 		_camera.projectionMatrix = p;
 		_camera.worldToCameraMatrix = rm * tm;
+	}
+
+	public void Set(GameObject projectionPlaneGameObject)
+	{
+		_projectionScreen = projectionPlaneGameObject;
 	}
 }

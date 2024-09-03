@@ -607,11 +607,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 8560577731247974805, guid: 441787973748a7f4d9060d5715508af1,
-        type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.5
-      objectReference: {fileID: 0}
     - target: {fileID: 8560577732318790478, guid: 441787973748a7f4d9060d5715508af1,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -766,26 +761,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1027573998348265592, guid: 43f12553c4ae8a34d83c307b7a329816,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -1.13
-      objectReference: {fileID: 0}
-    - target: {fileID: 1585963592378060825, guid: 43f12553c4ae8a34d83c307b7a329816,
-        type: 3}
-      propertyPath: m_AllowXRRendering
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 2773738217876170405, guid: 43f12553c4ae8a34d83c307b7a329816,
         type: 3}
       propertyPath: _motionTracker
       value: 
       objectReference: {fileID: 3235427379104085552}
-    - target: {fileID: 2942446292218350189, guid: 43f12553c4ae8a34d83c307b7a329816,
-        type: 3}
-      propertyPath: m_AllowXRRendering
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 3863643443209696391, guid: 43f12553c4ae8a34d83c307b7a329816,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -838,11 +818,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4133349172757856246, guid: 43f12553c4ae8a34d83c307b7a329816,
         type: 3}
-      propertyPath: projectionScreen
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 4133349172757856246, guid: 43f12553c4ae8a34d83c307b7a329816,
-        type: 3}
       propertyPath: _projectionScreen
       value: 
       objectReference: {fileID: 2112568840}
@@ -850,16 +825,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: StereoCamera
-      objectReference: {fileID: 0}
-    - target: {fileID: 6840529224844526976, guid: 43f12553c4ae8a34d83c307b7a329816,
-        type: 3}
-      propertyPath: m_TagString
-      value: Untagged
-      objectReference: {fileID: 0}
-    - target: {fileID: 8434164221690678903, guid: 43f12553c4ae8a34d83c307b7a329816,
-        type: 3}
-      propertyPath: projectionScreen
-      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 8434164221690678903, guid: 43f12553c4ae8a34d83c307b7a329816,
         type: 3}
@@ -877,7 +842,7 @@ SceneRoots:
   m_Roots:
   - {fileID: 1395888837}
   - {fileID: 1487798863}
+  - {fileID: 1224997340}
   - {fileID: 3235427379104085551}
   - {fileID: 3667075122644510295}
   - {fileID: 2112568839}
-  - {fileID: 1224997340}

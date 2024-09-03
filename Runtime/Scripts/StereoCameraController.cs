@@ -2,10 +2,13 @@
 
 public class StereoCameraController : MonoBehaviour
 {
-    [SerializeField] XRTracker _motionTracker;
+    [Header("External dependencies"), SerializeField] XRTracker _motionTracker;
+    [SerializeField] ProjectionPlane _projectionPlane;
     
-    [SerializeField] Camera _cameraLeft;
+    [Header("Internal dependencies"),SerializeField] Camera _cameraLeft;
     [SerializeField] Camera _cameraRight;
+    [SerializeField] ProjectionMatrix _projectionPlaneLeft;
+    [SerializeField] ProjectionMatrix _projectionPlaneRight;
     
     void Awake() => Application.targetFrameRate = 120;
 
@@ -13,6 +16,9 @@ public class StereoCameraController : MonoBehaviour
     {
         transform.SetParent(_motionTracker.transform);
         transform.localPosition = Vector3.zero;
+        
+        _projectionPlaneLeft.Set(_projectionPlane.gameObject);
+        _projectionPlaneRight.Set(_projectionPlane.gameObject);
     }
 
     void FixedUpdate()
