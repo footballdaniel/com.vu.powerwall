@@ -22,6 +22,24 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "DominantFootPosition",
+                    "type": "Value",
+                    "id": "07fdfd1e-477d-409a-80e0-28f69b10d2d3",
+                    "expectedControlType": "Vector3",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "DominantFootRotation",
+                    "type": "Value",
+                    "id": "4a302eae-7970-49de-98ff-6e0ff0fcfaa8",
+                    "expectedControlType": "Quaternion",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [
@@ -38,12 +56,34 @@
                 },
                 {
                     "name": "",
+                    "id": "d1798eb3-787c-43d0-ad31-3df7e9d043b3",
+                    "path": "<XRViveTracker>{Right Foot}/devicePosition",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "DominantFootPosition",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "64a58773-bcea-48a7-82e2-e1500a35f9f4",
                     "path": "<XRViveTracker>{Camera}/deviceRotation",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "HeadRotation",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "dd5e6353-2426-4414-a9b2-d07686887192",
+                    "path": "<XRViveTracker>{Right Foot}/deviceRotation",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "DominantFootRotation",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
