@@ -2,7 +2,7 @@
     "name": "InputActions",
     "maps": [
         {
-            "name": "XR",
+            "name": "User",
             "id": "135b03fa-e998-4ab0-a7d1-4c754a7812c0",
             "actions": [
                 {
@@ -40,6 +40,24 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "NonDominantFootPosition",
+                    "type": "Value",
+                    "id": "a64406a6-3d73-47a9-a6fb-cb04b03b86b2",
+                    "expectedControlType": "Vector3",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "New action",
+                    "type": "Button",
+                    "id": "91fa6914-b502-48b6-854b-afc181fdc28f",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -84,6 +102,56 @@
                     "processors": "",
                     "groups": "",
                     "action": "DominantFootRotation",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "64e12ad3-cf95-4a61-902b-5a1ba5d0b33e",
+                    "path": "<XRViveTracker>{Left Foot}/devicePosition",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "NonDominantFootPosition",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "483a95f6-0096-490e-a44b-5ccd419bf57b",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "New action",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "Defender",
+            "id": "06b10af0-b366-4f0c-9e55-8e8cd3f09fc4",
+            "actions": [
+                {
+                    "name": "HipsPosition",
+                    "type": "Value",
+                    "id": "67525aca-7e19-48d9-8431-8b05a2c73383",
+                    "expectedControlType": "Vector3",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "6c9a78e7-4154-4ea5-88ea-31526370e81b",
+                    "path": "<XRViveTracker>{Waist}/devicePosition",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "HipsPosition",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

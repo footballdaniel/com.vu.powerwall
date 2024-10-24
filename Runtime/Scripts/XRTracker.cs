@@ -7,6 +7,9 @@ public class XRTracker : MonoBehaviour
 {
 	[SerializeField] InputActionReference _positionAction;
 	[SerializeField] bool _isXForward;
+	
+	[field: SerializeReference] public string TrackerMappingName { get; private set; }
+	
 
 	void Update()
 	{
