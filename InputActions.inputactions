@@ -51,6 +51,15 @@
                     "initialStateCheck": true
                 },
                 {
+                    "name": "HipsPosition",
+                    "type": "Value",
+                    "id": "0d8fed37-4ed2-4964-9e13-2d469b6f9a9a",
+                    "expectedControlType": "Vector3",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
                     "name": "New action",
                     "type": "Button",
                     "id": "91fa6914-b502-48b6-854b-afc181fdc28f",
@@ -113,6 +122,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "NonDominantFootPosition",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "04adbf93-6e97-41fc-980e-789678a9b404",
+                    "path": "<XRViveTracker>{Chest}/devicePose/position",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "HipsPosition",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
