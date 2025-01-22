@@ -21,8 +21,8 @@ public class ProjectionMatrix : MonoBehaviour
 		var pb = _projectionScreen.transform.TransformPoint(new Vector3(5.0f, 0.0f, -5.0f));
 		// lower right corner
 		var pc = _projectionScreen.transform.TransformPoint(new Vector3(-5.0f, 0.0f, 5.0f));
-		
-		
+
+
 		// upper left corner
 		var pe = transform.position;
 		// eye position
